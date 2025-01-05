@@ -7,7 +7,6 @@ in
 { 
   home.username = username;
   home.homeDirectory = homeDir;
-
   home.stateVersion = "24.11"; 
 
   programs.neovim = {
@@ -34,20 +33,23 @@ in
       zshManagerPath="$HOME/.config/zsh/.zsh.d/zsh-d-manager.sh"
       [ -e $zshManagerPath ] && . $zshManagerPath
     ''; # nix(-daemon).shはNixの環境変数を読み込むためのスクリプト(home-managerを使うため)
-  };
+};
 
   programs.starship.enable = true;
   programs.home-manager.enable = true;
 
-  home.packages = [
-    pkgs.git
-    pkgs.gh
-    pkgs.fzf
-    pkgs.tree
-    pkgs.lunarvim
-    (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
-    pkgs.devbox
-  ];
+  home.packages = with pkgs; [
+    git
+    gh
+    fzf
+    tree
+    lunarvim
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    devbox
+    gradle
+    kotlin
+    kotlin-native
+];
 
   home.file = {
     ".config/nvim".source = "${homeDir}/dotfiles/.config/nvim";
