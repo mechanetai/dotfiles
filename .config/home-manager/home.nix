@@ -3,10 +3,16 @@
 let
   username = builtins.getEnv "USER"; # 環境変数$USERを取得
   homeDir = builtins.getEnv "HOME"; # 環境変数$HOMEを取得
+
+  # Common paths
+  nixDaemonPath = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
+  nixProfilePath = "${homeDir}/.nix-profile/etc/profile.d/nix.sh";
+  zshManagerPath = "${homeDir}/.config/zsh/.zsh.d/zsh-d-manager.sh";
 in
 { 
   home.username = username;
   home.homeDirectory = homeDir;
+
   home.stateVersion = "24.11"; 
 
   programs.neovim = {
@@ -24,16 +30,11 @@ in
     syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
     dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
     initExtra = ''
-      nixDaemonPath="/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh"
-      [ -e $nixDaemonPath ] && . $nixDaemonPath
-
-      nixProfilePath="$HOME/.nix-profile/etc/profile.d/nix.sh"
-      [ -e $nixProfilePath ] && . $nixProfilePath
-
-      zshManagerPath="$HOME/.config/zsh/.zsh.d/zsh-d-manager.sh"
-      [ -e $zshManagerPath ] && . $zshManagerPath
+      [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
+      [ -e ${nixProfilePath} ] && . ${nixProfilePath}
+      [ -e ${zshManagerPath} ] && . ${zshManagerPath}
     ''; # nix(-daemon).shはNixの環境変数を読み込むためのスクリプト(home-managerを使うため)
-};
+  };
 
   programs.starship.enable = true;
   programs.home-manager.enable = true;
@@ -44,12 +45,12 @@ in
     fzf
     tree
     lunarvim
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts._0xproto
+    nerd-fonts.droid-sans-mono
     devbox
-    gradle
-    kotlin
-    kotlin-native
-];
+    sqlfluff
+    nixfmt-rfc-style
+  ];
 
   home.file = {
     ".config/nvim".source = "${homeDir}/dotfiles/.config/nvim";
@@ -61,5 +62,4 @@ in
   home.sessionVariables = {
     PYTHONSTARTUP = "${homeDir}/.config/python/pythonstartup.py";
   };
-
 }
