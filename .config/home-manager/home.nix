@@ -9,11 +9,11 @@ let
   nixProfilePath = "${homeDir}/.nix-profile/etc/profile.d/nix.sh";
   zshManagerPath = "${homeDir}/.config/zsh/.zsh.d/zsh-d-manager.sh";
 in
-{ 
+{
   home.username = username;
   home.homeDirectory = homeDir;
 
-  home.stateVersion = "24.11"; 
+  home.stateVersion = "24.11";
 
   programs.neovim = {
     enable = true;
@@ -49,7 +49,7 @@ in
     nerd-fonts.droid-sans-mono
     devbox
     sqlfluff
-    nixfmt-rfc-style
+    nixfmt-rfc-style # for VSCode format
   ];
 
   home.file = {
