@@ -44,12 +44,13 @@ in
     gh
     fzf
     tree
-    lunarvim
-    nerd-fonts._0xproto
-    nerd-fonts.droid-sans-mono
+    #lunarvim
+    #nerd-fonts._0xproto
+    #nerd-fonts.droid-sans-mono
     devbox
     sqlfluff
     nixfmt-rfc-style # for VSCode format
+    uv
   ];
 
   home.file = {
