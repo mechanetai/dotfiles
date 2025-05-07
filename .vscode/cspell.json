@@ -1,6 +1,7 @@
 {
     "words": [
         "nixfmt",
+        "nixpkgs",
         "nvim",
         "PYTHONSTARTUP",
         "sqlfluff"
