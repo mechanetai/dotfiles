@@ -53,11 +53,12 @@ in
     uv
   ];
 
+  # 実態のhome.nixとの相対位置から、特定の位置へのシンボリックリンクを貼る
   home.file = {
-    ".config/nvim".source = "${homeDir}/dotfiles/.config/nvim";
-    ".config/python".source = "${homeDir}/dotfiles/.config/python";
-    ".config/zsh/.zsh.d".source = "${homeDir}/dotfiles/.config/zsh/.zsh.d";
-    ".config/starship.toml".source = "${homeDir}/dotfiles/.config/starship.toml";
+    ".config/nvim".source = ../nvim;
+    ".config/python".source = ../python;
+    ".config/zsh/.zsh.d".source = ../zsh/.zsh.d;
+    ".config/starship.toml".source = ../starship.toml;
   };
 
   home.sessionVariables = {

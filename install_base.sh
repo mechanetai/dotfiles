@@ -5,7 +5,7 @@ source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
 # Link home.nix
 mkdir --parents ~/.config/home-manager
-ln --symbolic "./.config/home-manager/home.nix" "$HOME/.config/home-manager/"
+ln -s "./.config/home-manager/home.nix" "$HOME/.config/home-manager/"
 
 # Install Home Manager
 nix-channel --add https://nixos.org/channels/nixos-24.11 nixpkgs
