@@ -29,7 +29,10 @@ in
     autosuggestion.enable = true; # zsh-autosuggestionsを有効化
     syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
     dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
-    initContent = ''
+    initExtra = ''
+      export VOLTA_HOME="${homeDir}/.volta"
+      export PYTHONSTARTUP="${homeDir}/.config/python/pythonstartup.py"
+      export PATH="$VOLTA_HOME/bin:$PATH"
       [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
       [ -e ${nixProfilePath} ] && . ${nixProfilePath}
       [ -e ${zshManagerPath} ] && . ${zshManagerPath}
@@ -64,5 +67,10 @@ in
 
   home.sessionVariables = {
     PYTHONSTARTUP = "${homeDir}/.config/python/pythonstartup.py";
+    VOLTA_HOME = "${homeDir}/.volta";
   };
+
+  home.sessionPath = [
+    "$VOLTA_HOME/bin"
+  ];
 }
