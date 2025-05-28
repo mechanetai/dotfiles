@@ -29,7 +29,7 @@ in
     autosuggestion.enable = true; # zsh-autosuggestionsを有効化
     syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
     dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
-    initExtra = ''
+    initContent = ''
       [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
       [ -e ${nixProfilePath} ] && . ${nixProfilePath}
       [ -e ${zshManagerPath} ] && . ${zshManagerPath}
@@ -51,6 +51,7 @@ in
     sqlfluff
     nixfmt-rfc-style # for VSCode format
     uv
+    volta
   ];
 
   # 実態のhome.nixとの相対位置から、特定の位置へのシンボリックリンクを貼る
