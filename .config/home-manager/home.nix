@@ -29,7 +29,7 @@ in
     autosuggestion.enable = true; # zsh-autosuggestionsを有効化
     syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
     dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
-    initExtra = ''
+    initContent = ''
       export VOLTA_HOME="${homeDir}/.volta"
       export PYTHONSTARTUP="${homeDir}/.config/python/pythonstartup.py"
       export PATH="$VOLTA_HOME/bin:$PATH"
@@ -50,6 +50,7 @@ in
     #lunarvim
     #nerd-fonts._0xproto
     #nerd-fonts.droid-sans-mono
+    nerd-fonts.fira-code
     devbox
     sqlfluff
     nixfmt-rfc-style # for VSCode format

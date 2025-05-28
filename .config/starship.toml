@@ -25,9 +25,3 @@ disabled = false
 added_style = 'bold blue'
 format = '\([+$added]($added_style)/[-$deleted]($deleted_style)\)'
 only_nonzero_diffs = true
-
-[custom.devbox]
-when = "[[ $DEVBOX_SHELL_ENABLED=1 ]]"
-style = "bold purple"
-symbol = " devbox"
-format = "[$symbol]($style)"
