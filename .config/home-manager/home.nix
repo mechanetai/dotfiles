@@ -41,6 +41,9 @@ in
     sessionPath = [
       "$VOLTA_HOME/bin"
     ];
+    shellAliases = {
+      cd = "z";
+    };
   };
   programs = {
     neovim = {
@@ -64,6 +67,7 @@ in
         [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
         [ -e ${nixProfilePath} ] && . ${nixProfilePath}
         [ -e ${zshManagerPath} ] && . ${zshManagerPath}
+        eval "$(zoxide init zsh)"
       ''; # nix(-daemon).shはNixの環境変数を読み込むためのスクリプト(home-managerを使うため)
     };
 
