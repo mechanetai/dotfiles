@@ -11,6 +11,14 @@
   - <https://nixos.org/download/>
 - 最後にhome-managerをインストール(init_home_nix.sh)
 
+## rust
+
+```bash
+rustup default stable
+cargo install zabrze
+eval "$(zabrze init --bind-keys)"
+```
+
 ## home.nix変更時
 
 - `home-manager switch`: 変更を適用

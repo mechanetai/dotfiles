@@ -23,6 +23,8 @@ nix-channel --add "https://github.com/nix-community/home-manager/archive/release
 nix-channel --update
 nix-shell '<home-manager>' -A install
 
+exec zsh -l
+
 # activate Home Manager
 # home-manager switch
 # cd "$HOME" || exit

@@ -26,26 +26,34 @@ in
       uv
       volta
       zoxide
+      rustup
     ];
-    # 実態のhome.nixとの相対位置から、特定の位置へのシンボリックリンクを貼る
-    file = {
-      ".config/nvim".source = ../nvim;
-      ".config/python".source = ../python;
-      ".config/zsh/.zsh.d".source = ../zsh/.zsh.d;
-      ".config/starship.toml".source = ../starship.toml;
-    };
+
     sessionVariables = {
       PYTHONSTARTUP = "${homeDir}/.config/python/pythonstartup.py";
       VOLTA_HOME = "${homeDir}/.volta";
     };
+
     sessionPath = [
       "$VOLTA_HOME/bin"
+      "${homeDir}/.cargo/bin"
     ];
+
     shellAliases = {
       cd = "z";
     };
   };
+
+  xdg.configFile = {
+    "nvim".source = ../nvim;
+    "python".source = ../python;
+    "zsh/.zsh.d".source = ../zsh/.zsh.d;
+    "starship.toml".source = ../starship.toml;
+    "zabrze".source = ../zabrze;
+  };
+
   programs = {
+
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -61,9 +69,12 @@ in
       syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
       dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
       initContent = ''
-        export VOLTA_HOME="${homeDir}/.volta"
-        export PYTHONSTARTUP="${homeDir}/.config/python/pythonstartup.py"
-        export PATH="$VOLTA_HOME/bin:$PATH"
+        if [[ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
+          source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+        fi
+        # export VOLTA_HOME="${homeDir}/.volta"
+        # export PYTHONSTARTUP="${homeDir}/.config/python/pythonstartup.py"
+        # export PATH="$VOLTA_HOME/bin:$PATH"
         [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
         [ -e ${nixProfilePath} ] && . ${nixProfilePath}
         [ -e ${zshManagerPath} ] && . ${zshManagerPath}
