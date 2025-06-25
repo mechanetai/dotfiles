@@ -27,6 +27,7 @@ in
       volta
       zoxide
       rustup
+      awscli2
       aws-sam-cli
     ];
 
