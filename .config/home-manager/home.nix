@@ -27,6 +27,7 @@ in
       volta
       zoxide
       rustup
+      aws-sam-cli
     ];
 
     sessionVariables = {
