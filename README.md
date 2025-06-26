@@ -13,10 +13,11 @@
 
 ## rust
 
+one-shot
+
 ```bash
 rustup default stable
 cargo install zabrze
-eval "$(zabrze init --bind-keys)"
 ```
 
 ## home.nix変更時
