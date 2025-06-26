@@ -74,9 +74,6 @@ in
         if [[ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
           source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
         fi
-        # export VOLTA_HOME="${homeDir}/.volta"
-        # export PYTHONSTARTUP="${homeDir}/.config/python/pythonstartup.py"
-        # export PATH="$VOLTA_HOME/bin:$PATH"
         [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
         [ -e ${nixProfilePath} ] && . ${nixProfilePath}
         [ -e ${zshManagerPath} ] && . ${zshManagerPath}
