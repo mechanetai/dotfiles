@@ -8,6 +8,7 @@ let
   nixDaemonPath = "/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh";
   nixProfilePath = "${homeDir}/.nix-profile/etc/profile.d/nix.sh";
   zshManagerPath = "${homeDir}/.config/zsh/.zsh.d/zsh-d-manager.sh";
+  hmSessionVarsPath = "${homeDir}/.nix-profile/etc/profile.d/hm-session-vars.sh";
 in
 {
   home = {
@@ -71,9 +72,7 @@ in
       syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
       dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
       initContent = ''
-        if [[ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]]; then
-          source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-        fi
+        [ -r ${hmSessionVarsPath} ] && . ${hmSessionVarsPath}
         [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
         [ -e ${nixProfilePath} ] && . ${nixProfilePath}
         [ -e ${zshManagerPath} ] && . ${zshManagerPath}
