@@ -79,6 +79,7 @@ in
         [ -e ${zshManagerPath} ] && . ${zshManagerPath}
         eval "$(zoxide init zsh)"
         (( $+commands[zabrze] )) && eval "$(zabrze init --bind-keys)"
+        bindkey -e
       ''; # nix(-daemon).shはNixの環境変数を読み込むためのスクリプト(home-managerを使うため)
     };
 
