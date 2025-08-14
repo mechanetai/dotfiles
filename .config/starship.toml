@@ -1,4 +1,4 @@
-continuation_prompt = '[❯❯ ](fg:blue)'
+continuation_prompt = '[>> ](fg:blue)'
 
 [directory]
 style = "fg:blue"
@@ -8,8 +8,8 @@ truncation_symbol = "..."
 truncate_to_repo = false
 
 [character]
-success_symbol = '[❯❯❯](fg:blue)'
-error_symbol = '[❯❯❯](fg:red)'
+success_symbol = '[>](fg:green)'
+error_symbol = '[>](fg:red)'
 
 [git_status]
 style = "fg:blue"

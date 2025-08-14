@@ -72,6 +72,7 @@ in
       autosuggestion.enable = true; # zsh-autosuggestionsを有効化
       syntaxHighlighting.enable = true; # zsh-syntax-highlightingを有効化
       dotDir = ".config/zsh"; # zshの設定ファイルを格納するディレクトリを指定
+      defaultKeymap = "emacs";
       initContent = ''
         [ -r ${hmSessionVarsPath} ] && . ${hmSessionVarsPath}
         [ -e ${nixDaemonPath} ] && . ${nixDaemonPath}
@@ -79,7 +80,6 @@ in
         [ -e ${zshManagerPath} ] && . ${zshManagerPath}
         eval "$(zoxide init zsh)"
         (( $+commands[zabrze] )) && eval "$(zabrze init --bind-keys)"
-        bindkey -e
       ''; # nix(-daemon).shはNixの環境変数を読み込むためのスクリプト(home-managerを使うため)
     };
 
