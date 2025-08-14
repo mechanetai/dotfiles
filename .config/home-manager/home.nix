@@ -30,6 +30,7 @@ in
       rustup
       awscli2
       aws-sam-cli
+      go
     ];
 
     sessionVariables = {
