@@ -3,9 +3,6 @@
   "editor.insertSpaces": true,
   "editor.formatOnSave": true,
   "editor.detectIndentation": false,
-  "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide",
-  },
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features",
   }

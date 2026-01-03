@@ -4,6 +4,7 @@
         "nixpkgs",
         "nvim",
         "PYTHONSTARTUP",
-        "sqlfluff"
+        "sqlfluff",
+        "ZDOTDIR"
     ]
 }
