@@ -17,28 +17,6 @@ typeset -A abbreviations=(
   'so' '>/dev/null; source $_'
 )
 
-# magic-abbrev-expand() {
-#   local lb=$LBUFFER
-#   local k best=""
-
-#   # 末尾一致するキーのうち、最も長いものを選ぶ
-#   for k in ${(k)abbreviations}; do
-#     [[ $lb == *"$k" ]] || continue
-#     (( ${#k} > ${#best} )) && best=$k
-#   done
-
-#   if [[ -n $best ]]; then
-#     local prefix_len=$(( ${#lb} - ${#best} ))
-#     if (( prefix_len > 0 )); then
-#       LBUFFER=${lb[1,$prefix_len]}${abbreviations[$best]}
-#     else
-#       LBUFFER=${abbreviations[$best]}
-#     fi
-#   fi
-
-#   zle self-insert
-# }
-
 magic-abbrev-expand() {
   local lb=$LBUFFER
 
