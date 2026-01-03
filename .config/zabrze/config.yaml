@@ -1,8 +1,0 @@
-abbrevs:
-  - name: git
-    abbr: g
-    snippet: git
-
-  - name: home-manager
-    abbr: hm
-    snippet: home-manager switch && exec $SHELL -l
