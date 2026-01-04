@@ -2,31 +2,60 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-ZSH_DIR="${HOME}/.config/zsh"
-ZSH_D_DIR="${ZSH_DIR}/zsh.d"
-ZSHRC="${ZSH_DIR}/.zshrc"
+ZSH_D_DIR="${ZDOTDIR}/zsh.d"
+ZSHRC="${ZDOTDIR}/.zshrc"
 SOURCE_ZSH_D_DIR="${SCRIPT_DIR}/.config/zsh/zsh.d"
+GIT_DIR="${XDG_CONFIG_HOME}/git"
+SOURCE_GIT_DIR="${SCRIPT_DIR}/.config/git/config.local"
+SOURCE_GIT_CONFIG="${SCRIPT_DIR}/.config/git/config"
+GIT_LOCAL_CONFIG="${GIT_DIR}/config.local"
+GIT_CONFIG="${GIT_DIR}/config"
 
-if [ ! -d "${ZSH_DIR}" ]; then
-  mkdir -p "${ZSH_DIR}"
-  echo "作成しました: ${ZSH_DIR}"
+ensure_dir() {
+  local dir_path="$1"
+
+  if [ ! -d "${dir_path}" ]; then
+    mkdir -p "${dir_path}"
+    echo "作成しました: ${dir_path}"
+  else
+    echo "既に存在します: ${dir_path}"
+  fi
+}
+
+ensure_file() {
+  local file_path="$1"
+  local parent_dir
+  parent_dir="$(dirname -- "${file_path}")"
+
+  if [ ! -d "${parent_dir}" ]; then
+    mkdir -p "${parent_dir}"
+    echo "作成しました: ${parent_dir}"
+  fi
+
+  if [ ! -f "${file_path}" ]; then
+    touch "${file_path}"
+    echo "作成しました: ${file_path}"
+  else
+    echo "既に存在します: ${file_path}"
+  fi
+}
+
+ensure_dir "${ZSH_D_DIR}"
+ensure_dir "${GIT_DIR}"
+
+if [ -f "${SOURCE_GIT_CONFIG}" ]; then
+  ln -sfn "${SOURCE_GIT_CONFIG}" "${GIT_CONFIG}"
+  echo "リンクしました: ${GIT_CONFIG}"
 else
-  echo "既に存在します: ${ZSH_DIR}"
+  echo "対象ファイルがありません: ${SOURCE_GIT_CONFIG}"
 fi
 
-if [ ! -d "${ZSH_D_DIR}" ]; then
-  mkdir -p "${ZSH_D_DIR}"
-  echo "作成しました: ${ZSH_D_DIR}"
-else
-  echo "既に存在します: ${ZSH_D_DIR}"
-fi
+ensure_file "${SOURCE_GIT_DIR}"
 
-if [ ! -f "${ZSHRC}" ]; then
-  touch "${ZSHRC}"
-  echo "作成しました: ${ZSHRC}"
-else
-  echo "既に存在します: ${ZSHRC}"
-fi
+ln -sfn "${SOURCE_GIT_DIR}" "${GIT_LOCAL_CONFIG}"
+echo "リンクしました: ${GIT_LOCAL_CONFIG}"
+
+ensure_file "${ZSHRC}"
 
 ZSHRC_SNIPPET_BEGIN="# >>> zsh.d (managed by dotfiles install)"
 if ! grep -Fqs "${ZSHRC_SNIPPET_BEGIN}" "${ZSHRC}"; then

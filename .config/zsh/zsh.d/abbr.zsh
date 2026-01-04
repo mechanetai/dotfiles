@@ -1,20 +1,30 @@
+typeset -A base=(
+  a aws
+  "aws l" "aws login"
+
+  g git
+  "git sw" "git switch"
+  "git switch c" "git switch -c"
+  "git f" "git fetch"
+  "git a" "git add -A"
+  "git c" "git commit -m ''"
+
+  d docker
+  "docker c" "docker compose"
+  "docker compose u" "docker compose up"
+  "docker compose up d" "docker compose up -d"
+
+  za 'echo $HOME/.config/zsh/zsh.d/abbr.zsh'
+)
+
+typeset -A phrase=(
+  "${base[za]} co" "${base[za]} | xargs code"
+  "${base[za]} so" "${base[za]} >/dev/null; source \$_"
+)
+
 typeset -A abbreviations=(
-  'a' 'aws'
-  'aws l' 'aws login'
-
-  'e' 'echo'
-
-  'g' 'git'
-  'git sw' 'git switch'
-  'git switch c' 'git switch -c'
-
-  'd' 'docker'
-  'docker c' 'docker compose'
-  'docker compose u' 'docker compose up'
-
-  'za' 'echo $HOME/.config/zsh/zsh.d/abbr.zsh'
-  'co' '| xargs code'
-  'so' '>/dev/null; source $_'
+  ${(kv)base}
+  ${(kv)phrase}
 )
 
 magic-abbrev-expand() {
@@ -28,5 +38,4 @@ magic-abbrev-expand() {
 }
 
 zle -N magic-abbrev-expand
-
 bindkey " " magic-abbrev-expand
